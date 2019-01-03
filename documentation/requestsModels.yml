@@ -1,0 +1,20 @@
+-
+  name: EventCreate
+  contentType: "application/json"
+  schema:
+    type: object
+    required: ['category', 'description', 'title', 'timestamp', 'location']
+    properties:
+      category:
+        type: string
+        enum: ['veganism', 'environment', 'other']
+      description:
+        type: string
+      title:
+        type: string
+      fee:
+        type: number
+      location:
+        type: string
+      timestamp:
+        type: number

@@ -1,0 +1,102 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: positiveaction # NOTE: update this with your service name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+plugins:
+  - serverless-aws-documentation
+  - serverless-reqvalidator-plugin
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  profile: speechless
+# you can overwrite defaults here
+#  stage: dev
+  region: us-east-1
+  role: arn:aws:iam::543776702460:role/positiveaction_role_lambda
+
+custom:
+  documentation:
+    api:
+      info:
+        version: '1'
+        title: 'Positive actions API '
+        contact:
+          name: Marc sirisak
+          email: speechlesshomme@email.com
+        license:
+          name: Private
+    models: ${file(./documentation/requestsModels.yml)}
+
+package:
+  individually: true
+  exclude:
+   - ".*/**"
+
+functions:
+  create_events:
+    handler: functions/create_events/index.handler
+    name: ${self:provider.stage}-create_events
+    package: 
+      include:
+        - 'functions/create_events/**'
+#    The following are a few example events you can configure
+#    NOTE: Please make sure to change your handler code to work with those events
+#    Check the event documentation for details
+    events:
+      - http:
+          path: events
+          method: post
+          private: true
+          reqValidatorName: onlyBody
+          documentation:
+            requestModels:
+               "application/json": EventCreate
+  
+  list_events:
+    handler: functions/list_events/index.handler
+    name: ${self:provider.stage}-list_events
+    package: 
+      include:
+        - 'functions/list_events/**'
+#    The following are a few example events you can configure
+#    NOTE: Please make sure to change your handler code to work with those events
+#    Check the event documentation for details
+    events:
+      - http:
+          path: events
+          method: get
+          private: true
+
+
+  elasticsearch_bridge:
+    handler: function/elasticsearch_bridge/index.handler
+    name: ${self:provider.stage}-elasticsearch_bridge
+    package: 
+      include:
+        - 'functions/elasticsearch_bridge/**'
+
+resources:
+  Resources:
+    onlyBody:
+      Type: AWS::ApiGateway::RequestValidator
+      Properties:
+        Name: 'only-body'
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ValidateRequestBody: true # true or false
+        ValidateRequestParameters: false # true or false

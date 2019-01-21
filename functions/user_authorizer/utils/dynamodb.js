@@ -4,14 +4,12 @@ const docClient = new aws.DynamoDB.DocumentClient();
 
 function createItem(params) {
     return new Promise((resolve, reject) => {
-        console.log('params', params);
-        docClient.put(params, (err) => {
+        docClient.put(params, (err, data) => {
             if (err) {
                 reject(err);
                 return;
             }
-            // return the item inserted
-            resolve(params.Item);
+            resolve(data);
         });
     });
 }

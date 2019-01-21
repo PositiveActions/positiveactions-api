@@ -18,3 +18,28 @@
         type: string
       timestamp:
         type: number
+      author:
+        type: string
+-
+  name: EventCreateResp
+  contentType: "application/json"
+  schema:
+    type: object
+    properties:
+      event_id: 
+        type: string
+      category:
+        type: string
+        enum: ['veganism', 'environment', 'other']
+      description:
+        type: string
+      title:
+        type: string
+      fee:
+        type: number
+      location:
+        type: string
+      timestamp:
+        type: number
+      author:
+        type: string

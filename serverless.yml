@@ -66,6 +66,11 @@ functions:
           documentation:
             requestModels:
                "application/json": EventCreate
+            methodResponses:
+            -
+              statusCode: "200"
+              responseModels:
+                "application/json": EventCreateResp
   
   list_events:
     handler: functions/list_events/index.handler
@@ -84,11 +89,13 @@ functions:
 
 
   elasticsearch_bridge:
-    handler: function/elasticsearch_bridge/index.handler
+    handler: functions/elasticsearch_bridge/index.handler
     name: ${self:provider.stage}-elasticsearch_bridge
     package: 
       include:
         - 'functions/elasticsearch_bridge/**'
+    environment:
+      ELASTICSEARCH_HOST: ${ssm:positiveaction.ELA_HOST}
 
 resources:
   Resources:

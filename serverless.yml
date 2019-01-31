@@ -78,14 +78,30 @@ functions:
     package: 
       include:
         - 'functions/list_events/**'
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
+    environment:
+      ELASTICSEARCH_HOST: ${ssm:positiveaction.ELA_HOST}
     events:
       - http:
           path: events
           method: get
           private: true
+          documentation:
+            queryParams:
+            -
+              name: "lat"
+              description: "Latitude of the position desired"
+            -
+              name: "lon"
+              description: "Longitude of the position desired"
+            -
+              name: "sdate"
+              description: "start date of the query"
+            -
+              name: "edate"
+              description: "end date of the query"
+            -
+              name: "category"
+              description: "Category of the desire event"
 
 
   elasticsearch_bridge:

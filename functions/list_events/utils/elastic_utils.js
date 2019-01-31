@@ -6,26 +6,6 @@ const client = new elasticsearch.Client({
     apiVersion: '6.2',
 });
 
-function buildBulkBody(method, index, indexType, payload) {
-    const body = [];
-    switch (method) {
-        case 'index':
-            for (let i = 0; i < payload.length; i++) {
-                body.push({
-                    index: { _index: index, _type: indexType, _id: payload[i].event_id }
-                });
-                body.push(payload[i]);
-            }
-        case 'delete':
-            break;
-        case 'update':
-            break;
-        default:
-            break;
-    }
-    return body;
-}
-
 function createItem(index, payload) {
     return new Promise((resolve, reject) => {
         client.create({
@@ -69,14 +49,6 @@ function indexExist(indexName) {
     });
 }
 
-function initMapping(indexName, typeName, payload) {
-    return client.indices.putMapping({
-        index: indexName,
-        type: typeName,
-        body: payload,
-    });
-}
-
 async function ping() {
     return new Promise((resolve, reject) => {
         client.ping({
@@ -91,12 +63,20 @@ async function ping() {
     });
 }
 
+function search(indexName, typeName, payload) {
+    return client.search({
+        index: indexName,
+        type: typeName,
+        body: payload,
+    });
+}
+
+
 module.exports = {
-    buildBulkBody,
+    search,
     createItem,
     createIndex,
     indexExist,
     ping,
     bulk,
-    initMapping,
 };

@@ -13,14 +13,17 @@ function buildParams(bodyRaw, tableName) {
             timestamp: parseInt(body.timestamp, 10),
             description: body.description,
             title: body.title,
-            location: body.location,
+            location_name: body.location,
+            location: {
+                lat: body.lat,
+                lon: body.lng,
+            },
             fee: body.fee,
             author: body.author,
             category: body.category,
         },
     };
 }
-
 
 module.exports.handler = async (event, context, callback) => {
     try {

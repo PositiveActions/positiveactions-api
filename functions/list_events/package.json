@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "elasticsearch": "^15.3.1",
     "uuid": "^3.3.2"
   }
 }

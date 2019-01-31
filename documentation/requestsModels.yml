@@ -14,8 +14,12 @@
         type: string
       fee:
         type: number
-      location:
+      location_name:
         type: string
+      lat:
+        type: number
+      lng:
+        type: number
       timestamp:
         type: number
       author:
@@ -39,6 +43,10 @@
         type: number
       location:
         type: string
+      lat:
+        type: number
+      lng:
+        type: number
       timestamp:
         type: number
       author:

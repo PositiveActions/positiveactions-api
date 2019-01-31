@@ -3,6 +3,7 @@
     "rules": {
         "indent": ["error", 4],
         "no-console":"off",
-        "max-len":"off"
+        "max-len":"off",
+        "no-underscore-dangle":"off"
     }
 }

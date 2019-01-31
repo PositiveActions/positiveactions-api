@@ -9,7 +9,15 @@ function timestamp2date() {
 }
 
 
+function buidResp(code, body) {
+    return {
+        statusCode: code,
+        body: (body instanceof String) ? body : JSON.stringify(body),
+    };
+}
+
 module.exports = {
     generateUuid,
     timestamp2date,
+    buidResp,
 };

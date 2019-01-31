@@ -2,6 +2,7 @@ const elastic = require('./utils/elastic_utils');
 const Constants = require('./utils/constants');
 const dynamodb = require('./utils/dynamodb');
 
+
 module.exports.handler = async (event, context, callback) => {
 
     try {
@@ -11,9 +12,12 @@ module.exports.handler = async (event, context, callback) => {
         const indexExist = await elastic.indexExist(Constants.EVENTS_INDEX);
         if (!indexExist) {
             await elastic.createIndex(Constants.EVENTS_INDEX);
+            await elastic.initMapping(Constants.EVENTS_INDEX, Constants.EVENTS_INDEX_TYPE, Constants.EVENTS_MAPPING);
         }
-        const res = await elastic.bulk(elastic.buildBulkBody('index', Constants.EVENTS_INDEX, Constants.EVENTS_INDEX_TYPE, data));
-        console.log(res);
+        if (data.length) {
+            const res = await elastic.bulk(elastic.buildBulkBody('index', Constants.EVENTS_INDEX, Constants.EVENTS_INDEX_TYPE, data));
+            console.log(res);
+        }
         callback(null, 'success bro');
     } catch (err) {
         console.error(err);

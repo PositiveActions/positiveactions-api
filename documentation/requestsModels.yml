@@ -51,3 +51,32 @@
         type: number
       author:
         type: string
+-
+  name: CommentCreate
+  contentType: "application/json"
+  schema:
+    type: object
+    required: ['event_id', 'message']
+    properties:
+      event_id:
+        type: string
+      message:
+        type: string
+      timestamp:
+        type: number
+-
+  name: CommentCreateResp
+  contentType: "application/json"
+  schema:
+    type: object
+    properties:
+      event_id: 
+        type: string
+      user_id: 
+        type: string
+      comment_id:
+        type: string
+      message:
+        type: string
+      timestamp:
+        type: number

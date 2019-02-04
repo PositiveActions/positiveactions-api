@@ -19,7 +19,6 @@ service: positiveaction # NOTE: update this with your service name
 plugins:
   - serverless-aws-documentation
   - serverless-reqvalidator-plugin
-
 provider:
   name: aws
   runtime: nodejs8.10
@@ -54,9 +53,6 @@ functions:
     package: 
       include:
         - 'functions/create_events/**'
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
     events:
       - http:
           path: events
@@ -71,7 +67,28 @@ functions:
               statusCode: "200"
               responseModels:
                 "application/json": EventCreateResp
-  
+
+  create_comments:
+    handler: functions/create_comments/index.handler
+    name: ${self:provider.stage}-create_comments
+    package: 
+      include:
+        - 'functions/create_events/**'
+    events:
+      - http:
+              path: comments
+              method: post
+              private: true
+              reqValidatorName: onlyBody
+              documentation:
+                requestModels:
+                  "application/json": CommentCreate
+                methodResponses:
+                -
+                  statusCode: "200"
+                  responseModels:
+                    "application/json": CommentCreateResp
+                
   list_events:
     handler: functions/list_events/index.handler
     name: ${self:provider.stage}-list_events

@@ -8,7 +8,11 @@ function timestamp2date() {
 
 }
 
-function buidResp(code, body) {
+function getCurrrentTimestampSeconde() {
+    return Math.floor(parseInt(Date.now(), 10) / 1000);
+}
+
+function buildResp(code, body) {
     return {
         statusCode: code,
         body: (body instanceof String) ? body : JSON.stringify(body),
@@ -18,5 +22,6 @@ function buidResp(code, body) {
 module.exports = {
     generateUuid,
     timestamp2date,
-    buidResp,
+    buildResp,
+    getCurrrentTimestampSeconde,
 };

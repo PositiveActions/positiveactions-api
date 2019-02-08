@@ -3,7 +3,7 @@
   contentType: "application/json"
   schema:
     type: object
-    required: ['category', 'description', 'title', 'timestamp', 'location']
+    required: ['category', 'description', 'title', 'location_name', 'lat', 'lng']
     properties:
       category:
         type: string
@@ -19,8 +19,6 @@
       lat:
         type: number
       lng:
-        type: number
-      timestamp:
         type: number
       author:
         type: string
@@ -62,8 +60,6 @@
         type: string
       message:
         type: string
-      timestamp:
-        type: number
 -
   name: CommentCreateResp
   contentType: "application/json"
@@ -77,6 +73,28 @@
       comment_id:
         type: string
       message:
+        type: string
+      timestamp:
+        type: number
+
+-
+  name: ParticipantCreate
+  contentType: "application/json"
+  schema:
+    type: object
+    required: ['event_id']
+    properties:
+      event_id:
+        type: string
+-
+  name: ParticipantCreateResp
+  contentType: "application/json"
+  schema:
+    type: object
+    properties:
+      event_id: 
+        type: string
+      user_id: 
         type: string
       timestamp:
         type: number

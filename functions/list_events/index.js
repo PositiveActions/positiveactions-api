@@ -20,6 +20,6 @@ module.exports.handler = async (event, context, callback) => {
         callback(null, util.buidResp(200, []));
     } catch (err) {
         console.error(err);
-        callback(err);
+        callback(null, util.buidResp(500, err));
     }
 };

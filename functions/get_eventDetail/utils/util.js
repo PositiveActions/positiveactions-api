@@ -8,10 +8,6 @@ function timestamp2date() {
 
 }
 
-function getCurrrentTimestampSeconde() {
-    return Math.floor(parseInt(Date.now(), 10) / 1000);
-}
-
 function buildResp(code, body) {
     return {
         statusCode: code,
@@ -23,5 +19,4 @@ module.exports = {
     generateUuid,
     timestamp2date,
     buildResp,
-    getCurrrentTimestampSeconde,
 };

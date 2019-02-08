@@ -10,10 +10,10 @@ function buildParams(bodyRaw, tableName) {
         TableName: tableName,
         Item: {
             event_id: util.generateUuid(),
-            timestamp: parseInt(body.timestamp, 10),
+            timestamp: util.getCurrrentTimestampSeconde(),
             description: body.description,
             title: body.title,
-            location_name: body.location,
+            location_name: body.location_name,
             location: {
                 lat: body.lat,
                 lon: body.lng,
@@ -31,9 +31,9 @@ module.exports.handler = async (event, context, callback) => {
         // we insert the event in the event and user event list
         const [newEventCreated] = await Promise.all([dynamodb.createItem(buildParams(event.body, TABLE_EVENTLIST))]);
         console.log('result', newEventCreated);
-        callback(null, util.buidResp(200, newEventCreated));
+        callback(null, util.buildResp(200, newEventCreated));
     } catch (err) {
         console.error(err);
-        callback(util.buildResp(500, err));
+        callback(null, util.buildResp(500, err));
     }
 };

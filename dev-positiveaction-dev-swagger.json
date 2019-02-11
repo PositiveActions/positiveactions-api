@@ -1,0 +1,392 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-02-11T12:32:30Z",
+    "title": "dev-positiveaction",
+    "contact": {
+      "name": "Marc sirisak",
+      "email": "speechlesshomme@email.com"
+    },
+    "license": {
+      "name": "Private"
+    }
+  },
+  "host": "zpui5msqkg.execute-api.us-east-1.amazonaws.com",
+  "basePath": "/dev",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/comments": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CommentCreate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommentCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/CommentCreateResp"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/events": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Category of the desire event",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sdate",
+            "in": "query",
+            "description": "start date of the query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude of the position desired",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "edate",
+            "in": "query",
+            "description": "end date of the query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "description": "Longitude of the position desired",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "EventCreate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/EventCreateResp"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/events/{event_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/EventDetailResp"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/participant": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ParticipantCreate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ParticipantCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ParticipantCreateResp"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Empty": {
+      "type": "object",
+      "title": "Empty Schema"
+    },
+    "ParticipantCreateResp": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      }
+    },
+    "ParticipantCreate": {
+      "type": "object",
+      "required": [
+        "event_id"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string"
+        }
+      }
+    },
+    "EventCreateResp": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "lng": {
+          "type": "number"
+        },
+        "author": {
+          "type": "string"
+        },
+        "fee": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "veganism",
+            "environment",
+            "other"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      }
+    },
+    "EventDetailResp": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "type": "string"
+              },
+              "comment_id": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "timestamp": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "type": "string"
+              },
+              "timestamp": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "EventCreate": {
+      "type": "object",
+      "required": [
+        "category",
+        "description",
+        "lat",
+        "lng",
+        "location_name",
+        "title"
+      ],
+      "properties": {
+        "location_name": {
+          "type": "string"
+        },
+        "lng": {
+          "type": "number"
+        },
+        "author": {
+          "type": "string"
+        },
+        "fee": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "veganism",
+            "environment",
+            "other"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number"
+        }
+      }
+    },
+    "CommentCreate": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "message"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "CommentCreateResp": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "comment_id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

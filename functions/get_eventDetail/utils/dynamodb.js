@@ -16,8 +16,20 @@ function createItem(params) {
     });
 }
 
-function queryItems() {
-
+function queryItems(params) {
+    return new Promise((resolve, reject) => {
+        docClient.query(params, (err, data) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            if (data.Count > 0) {
+                resolve(data.Items);
+            } else {
+                resolve([]);
+            }
+        });
+    });
 }
 
 function getItem(params) {

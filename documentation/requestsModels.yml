@@ -98,3 +98,33 @@
         type: string
       timestamp:
         type: number
+-
+  name: EventDetailResp
+  contentType: "application/json"
+  schema:
+    type: object
+    properties:
+      event_id: 
+        type: string
+      comments: 
+        type: array
+        items: 
+          type: object
+          properties:
+            comment_id: 
+              type: string
+            message:
+              type: string
+            timestamp:
+              type: number
+            user_id:
+              type: string
+      participants:
+        type: array
+        items: 
+          type: object
+          properties:
+            user_id: 
+              type: string
+            timestamp:
+              type: number

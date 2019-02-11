@@ -140,7 +140,23 @@ functions:
             -
               name: "category"
               description: "Category of the desire event"
-
+  get_eventDetail:
+    handler: functions/get_eventDetail/index.handler
+    name: ${self:provider.stage}-get_eventDetail
+    package: 
+      include:
+        - 'functions/get_eventDetail/**'
+    events:
+      - http:
+              path: events/{event_id}
+              method: get
+              private: true
+              documentation:
+                methodResponses:
+                -
+                  statusCode: "200"
+                  responseModels:
+                    "application/json": EventDetailResp
 
   elasticsearch_bridge:
     handler: functions/elasticsearch_bridge/index.handler

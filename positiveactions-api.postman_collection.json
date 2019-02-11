@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "def3065e-3e33-4739-953f-7d5349ae4496",
+		"name": "positiveactions-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create_events",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{auth-marc}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"category\": \"veganism\",\n\t\"description\": \"I am an positive event\",\n\t\"title\": \"positive event 1\",\n\t\"fee\": 0,\n\t\"location_name\": \"Taipei city gang\",\n\t\"lat\": 25.043770,\n\t\"lng\": 121.495761,\n\t\"author\": \"user1\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/events",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"events"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list_events",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{auth-marc}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/events?category=veganism&lat=2.1234&lon=41.4312&sdate=1549250750&edate=1549270750",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"events"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "veganism"
+						},
+						{
+							"key": "lat",
+							"value": "2.1234"
+						},
+						{
+							"key": "lon",
+							"value": "41.4312"
+						},
+						{
+							"key": "sdate",
+							"value": "1549250750"
+						},
+						{
+							"key": "edate",
+							"value": "1549270750"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_comments",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{auth-marc}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"message\": \"this is a comment\",\n\t\"event_id\": \"event1\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/comments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"comments"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_participant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "x-api-key",
+						"type": "text",
+						"value": "{{auth-marc}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"event_id\": \"2c1aed2f-a273-725c2ea71a1e\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/participant",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"participant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_eventDetails",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{auth-marc}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/events/eventId",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"events",
+						"eventId"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "64084fe4-9d37-44f8-827b-19c47a725dfa",
+			"key": "auth-marc",
+			"value": "RV1LqrOcWg3dbZSmkPaNR1z4ZJDWKKMDwU5fmJ38",
+			"type": "string"
+		}
+	]
+}

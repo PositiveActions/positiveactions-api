@@ -3,7 +3,7 @@
   contentType: "application/json"
   schema:
     type: object
-    required: ['category', 'description', 'title', 'location_name', 'lat', 'lng']
+    required: ['category', 'description', 'title', 'location_name', 'lat', 'lng', 'sdate']
     properties:
       category:
         type: string
@@ -22,6 +22,8 @@
         type: number
       author:
         type: string
+      sdate:
+        type: number
 -
   name: EventCreateResp
   contentType: "application/json"
@@ -48,6 +50,8 @@
       timestamp:
         type: number
       author:
+        type: string
+      sdate:
         type: string
 -
   name: CommentCreate

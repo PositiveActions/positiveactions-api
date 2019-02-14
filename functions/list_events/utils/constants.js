@@ -22,7 +22,7 @@ const queryByLocTimeDate = obj => ({
                 },
                 {
                     range: {
-                        timestamp: {
+                        sdate: {
                             gte: obj.sdate,
                             lte: obj.edate,
                         },

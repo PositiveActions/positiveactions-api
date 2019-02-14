@@ -6,7 +6,7 @@ module.exports = {
             location: {
                 type: 'geo_point',
             },
-            timestamp: {
+            sdate: {
                 type: 'date',
                 format: 'epoch_second',
             },

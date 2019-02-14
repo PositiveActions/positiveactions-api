@@ -21,6 +21,7 @@ function buildParams(bodyRaw, tableName) {
             fee: body.fee,
             author: body.author,
             category: body.category,
+            sdate: body.sdate,
         },
     };
 }

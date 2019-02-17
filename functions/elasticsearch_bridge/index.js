@@ -4,7 +4,6 @@ const dynamodb = require('./utils/dynamodb');
 
 
 module.exports.handler = async (event, context, callback) => {
-
     try {
         console.log('event', event);
         const data = dynamodb.getTheInsertAndDynamoData(event.Records);

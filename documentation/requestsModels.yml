@@ -132,3 +132,29 @@
               type: string
             timestamp:
               type: number
+      info:
+        type: object
+        properties: 
+          event_id: 
+            type: string
+          category:
+            type: string
+            enum: ['veganism', 'environment', 'other']
+          description:
+            type: string
+          title:
+            type: string
+          fee:
+            type: number
+          location:
+            type: string
+          lat:
+            type: number
+          lng:
+            type: number
+          timestamp:
+            type: number
+          author:
+            type: string
+          sdate:
+            type: string

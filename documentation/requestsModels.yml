@@ -3,11 +3,11 @@
   contentType: "application/json"
   schema:
     type: object
-    required: ['category', 'description', 'title', 'location_name', 'lat', 'lng', 'sdate']
+    required: ['category', 'description', 'title', 'location_name', 'lat', 'lng', 'sdate', 'contact']
     properties:
       category:
         type: string
-        enum: ['veganism', 'environment', 'other']
+        enum: ['veganism', 'environment', 'other', 'all', 'recycling', 'social']
       description:
         type: string
       title:
@@ -24,6 +24,14 @@
         type: string
       sdate:
         type: number
+      contact: 
+        type: object
+        required: ['email']
+        properties:
+          email: 
+            type: string
+          websites:
+            type: string
 -
   name: EventCreateResp
   contentType: "application/json"
@@ -52,6 +60,8 @@
       author:
         type: string
       sdate:
+        type: string
+      contact: 
         type: string
 -
   name: CommentCreate
@@ -158,3 +168,18 @@
             type: string
           sdate:
             type: string
+-
+  name: CategoryResp
+  contentType: "application/json"
+  schema:
+    type: array
+    items:
+      type: object
+      properties:
+        category_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+

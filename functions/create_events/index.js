@@ -22,6 +22,7 @@ function buildParams(bodyRaw, tableName) {
             author: body.author,
             category: body.category,
             sdate: body.sdate,
+            contact: JSON.stringify(body.contact),
         },
     };
 }

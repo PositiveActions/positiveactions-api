@@ -1,15 +1,20 @@
 const dynamodb = require('./utils/dynamodb');
 const util = require('./utils/util');
+const imgHelper = require('./utils/imgHelper');
 
 const TABLE_EVENTLIST = 'events-list';
 // const TABLE_USEREVENT = 'users-events';
 
-function buildParams(bodyRaw, tableName) {
+
+async function buildParams(bodyRaw, tableName) {
     const body = JSON.parse(bodyRaw);
+    const eventId = util.generateUuid();
+    // we receive the name of the image uploaded;
+    const img = await imgHelper.uploadImg(eventId, body.img);
     return {
         TableName: tableName,
         Item: {
-            event_id: util.generateUuid(),
+            event_id: eventId,
             timestamp: util.getCurrrentTimestampSeconde(),
             description: body.description,
             title: body.title,
@@ -23,6 +28,7 @@ function buildParams(bodyRaw, tableName) {
             category: body.category,
             sdate: body.sdate,
             contact: JSON.stringify(body.contact),
+            img,
         },
     };
 }
@@ -30,8 +36,9 @@ function buildParams(bodyRaw, tableName) {
 module.exports.handler = async (event, context, callback) => {
     try {
         console.log('body', event.body); // Contains incoming request data (e.g., query params, headers and more)
+        const params = await buildParams(event.body, TABLE_EVENTLIST);
         // we insert the event in the event and user event list
-        const [newEventCreated] = await Promise.all([dynamodb.createItem(buildParams(event.body, TABLE_EVENTLIST))]);
+        const [newEventCreated] = await Promise.all([dynamodb.createItem(params)]);
         console.log('result', newEventCreated);
         callback(null, util.buildResp(200, newEventCreated));
     } catch (err) {

@@ -51,6 +51,8 @@ functions:
     handler: functions/create_events/index.handler
     name: ${self:provider.stage}-create_events
     package: 
+      exclude:
+        - functions/**
       include:
         - 'functions/create_events/**'
     events:
@@ -72,6 +74,8 @@ functions:
     handler: functions/create_comments/index.handler
     name: ${self:provider.stage}-create_comments
     package: 
+      exclude:
+        - functions/**
       include:
         - 'functions/create_events/**'
     events:
@@ -93,6 +97,8 @@ functions:
     handler: functions/create_participant/index.handler
     name: ${self:provider.stage}-create_participant
     package: 
+      exclude:
+        - functions/**
       include:
         - 'functions/create_participant/**'
     events:
@@ -114,6 +120,8 @@ functions:
     handler: functions/list_events/index.handler
     name: ${self:provider.stage}-list_events
     package: 
+      exclude:
+        - functions/**
       include:
         - 'functions/list_events/**'
     environment:
@@ -144,6 +152,8 @@ functions:
     handler: functions/get_eventDetail/index.handler
     name: ${self:provider.stage}-get_eventDetail
     package: 
+      exclude:
+        - functions/**
       include:
         - 'functions/get_eventDetail/**'
     events:
@@ -162,6 +172,8 @@ functions:
     handler: functions/get_categoryList/index.handler
     name: ${self:provider.stage}-get_categoryList
     package: 
+      exclude:
+        - functions/**
       include:
         - 'functions/get_eventDetail/**'
     events:
@@ -180,10 +192,26 @@ functions:
     handler: functions/elasticsearch_bridge/index.handler
     name: ${self:provider.stage}-elasticsearch_bridge
     package: 
+      exclude:
+        - functions/**
       include:
         - 'functions/elasticsearch_bridge/**'
     environment:
       ELASTICSEARCH_HOST: ${ssm:positiveaction.ELA_HOST}
+  
+  get_eventImg:
+    handler: functions/get_eventImg/index.handler
+    name: ${self:provider.stage}-get_eventImg
+    package: 
+      exclude:
+        - functions/**
+      include:
+        - 'functions/get_eventImg/**'
+    events:
+      - http:
+          path: image
+          method: get
+          private: true
 
 resources:
   Resources:

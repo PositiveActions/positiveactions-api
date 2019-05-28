@@ -213,6 +213,48 @@ functions:
           method: get
           private: true
 
+  get_userInfo:
+    handler: functions/get_userInfo/index.handler
+    name: ${self:provider.stage}-get_userInfo
+    package: 
+      exclude:
+        - functions/**
+      include:
+        - 'functions/get_userInfo/**'
+    events:
+      - http:
+          path: user/
+          method: get
+          private: true
+          documentation:
+            queryParams:
+            -
+              name: "userId"
+              description: "userId of the user desire to get info"
+            methodResponses:
+            -
+              statusCode: "200"
+              responseModels:
+                "application/json": UserInfoResp
+
+  cognito_checkUser:
+    handler: functions/cognito_checkUser/index.handler
+    name: ${self:provider.stage}-cognito_checkUser
+    package: 
+      exclude:
+        - functions/**
+      include:
+        - 'functions/cognito_checkUser/**'
+
+  cognito_createUser:
+    handler: functions/cognito_createUser/index.handler
+    name: ${self:provider.stage}-cognito_createUser
+    package: 
+      exclude:
+        - functions/**
+      include:
+        - 'functions/cognito_createUser/**'
+
 resources:
   Resources:
     onlyBody:

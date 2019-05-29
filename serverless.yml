@@ -77,7 +77,7 @@ functions:
       exclude:
         - functions/**
       include:
-        - 'functions/create_events/**'
+        - 'functions/create_comments/**'
     events:
       - http:
           path: comments

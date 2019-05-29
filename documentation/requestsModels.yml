@@ -72,9 +72,11 @@
   contentType: "application/json"
   schema:
     type: object
-    required: ['event_id', 'message']
+    required: ['event_id', 'user_id', 'message']
     properties:
       event_id:
+        type: string
+      user_id:
         type: string
       message:
         type: string
@@ -87,6 +89,8 @@
       event_id: 
         type: string
       user_id: 
+        type: string
+      username: 
         type: string
       comment_id:
         type: string

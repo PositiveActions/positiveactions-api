@@ -3,6 +3,8 @@ const DISTANCE_RANGE = '100km';
 // obj is an object with attribute lat, lon, category and date
 const queryByLocTimeDate = (obj) => {
     const query = {
+        from: 0,
+        size: 1000,
         query: {
             bool: {
                 must: {
